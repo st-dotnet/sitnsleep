@@ -30,12 +30,21 @@ namespace SitNSleep.Web.Controllers
 
         #region Action Method(s)
 
+        /// <summary>
+        /// Index Method
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             _logger.Info($"In SalesPerson Controller Index Action.");
             return View();
         }
 
+        /// <summary>
+        /// Get Salesperson By SalespersonId
+        /// </summary>
+        /// <param name="salespersonId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("~/SalesPerson/GetSalesPerson/{salespersonId}")]
         public async Task<ActionResult<IEnumerable<SalesPersonModel>>> GetSalesPerson(string salespersonId)
@@ -58,6 +67,10 @@ namespace SitNSleep.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Get All SalesPerson
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("~/SalesPerson/SalesPersonList")]
         public async Task<ActionResult<IEnumerable<SalesPersonModel>>> SalesPersonList()
@@ -78,6 +91,11 @@ namespace SitNSleep.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Add SalesPerson
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("~/SalesPerson/AddSalesPerson")]
         public async Task<ActionResult> AddSalesPerson([FromBody] SalesPersonModel model)
@@ -99,6 +117,11 @@ namespace SitNSleep.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Update SalesPerson
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("~/SalesPerson/UpdateSalesPerson")]
         public async Task<ActionResult> UpdateSalesPerson([FromBody] SalesPersonModel model)
@@ -120,9 +143,14 @@ namespace SitNSleep.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete SalesPerson
+        /// </summary>
+        /// <param name="saleId"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("~/SalesPerson/DeleteSalesPerson/{saleId}")]
-        public async Task<bool> DeleteSalesPersonAsync(int saleId)
+        public async Task<bool> DeleteSalesPerson(int saleId)
         {
             _logger.Info($"In SalesPerson Controller DeleteSalesPersonAsync Action.");
             try

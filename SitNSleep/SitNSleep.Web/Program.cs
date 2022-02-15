@@ -31,8 +31,6 @@ var mappingConfig = new MapperConfiguration(mc =>
 IMapper autoMapper = mappingConfig.CreateMapper();
 builder.Services.AddSingleton(autoMapper);
 
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,7 +54,6 @@ app.UseSwaggerUI();
 
 app.UseAuthorization();
 
-// global error handler
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.MapRazorPages();
