@@ -36,31 +36,105 @@ namespace SitNSleep.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("~/SalesPerson/GetSalesPerson/{salespersonId}")]
+        public async Task<ActionResult<IEnumerable<SalesPersonModel>>> GetSalesPerson(string salespersonId)
+        {
+            _logger.Info($"In SalesPerson Controller GetSalesPerson Action.");
+            try
+            {
+                var salesperson = await _salespersonService.GetSalesPerson(salespersonId);
+
+                //return Ok(list);
+                return Json(new
+                {
+                    message = salesperson
+                });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         [HttpGet]
         [Route("~/SalesPerson/SalesPersonList")]
         public async Task<ActionResult<IEnumerable<SalesPersonModel>>> SalesPersonList()
         {
-            var list = await _salespersonService.GetSalesPersonList();
-
-            //return Ok(list);
-            return Json(new
+            _logger.Info($"In SalesPerson Controller SalesPersonList Action.");
+            try
             {
-                message = list
-            });
+                var list = await _salespersonService.GetSalesPersonList();
+
+                return Json(new
+                {
+                    message = list
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpPost]
         [Route("~/SalesPerson/AddSalesPerson")]
-        public async Task<ActionResult> AddSalesPerson(SalesPersonModel model)
+        public async Task<ActionResult> AddSalesPerson([FromBody] SalesPersonModel model)
         {
-            var request = _mapper.Map<SalesPersonDto>(model);
-            var salesperson = await _salespersonService.AddSalesPerson(request);
-
-            return Json(new
+            _logger.Info($"In SalesPerson Controller AddSalesPerson Action.");
+            try
             {
-                message = salesperson
-            });
+                var request = _mapper.Map<SalesPersonDto>(model);
+                var salesperson = await _salespersonService.AddSalesPerson(request);
+
+                return Json(new
+                {
+                    message = salesperson
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPut]
+        [Route("~/SalesPerson/UpdateSalesPerson")]
+        public async Task<ActionResult> UpdateSalesPerson([FromBody] SalesPersonModel model)
+        {
+            _logger.Info($"In SalesPerson Controller UpdateSalesPerson Action.");
+            try
+            {
+                var request = _mapper.Map<SalesPersonDto>(model);
+                var salesperson = await _salespersonService.UpdateSalesPerson(request);
+
+                return Json(new
+                {
+                    message = salesperson
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpDelete]
+        [Route("~/SalesPerson/DeleteSalesPerson/{saleId}")]
+        public async Task<bool> DeleteSalesPersonAsync(int saleId)
+        {
+            _logger.Info($"In SalesPerson Controller DeleteSalesPersonAsync Action.");
+            try
+            {
+                var salesperson = await _salespersonService.DeleteSalesPerson(saleId);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion

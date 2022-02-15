@@ -2,7 +2,6 @@
 {
     public class SalesPersonDto
     {
-        public int SaleId { get; set; }
         public string? SalesPersonId { get; set; }
         public string? Name { get; set; }
         public bool? Available { get; set; }
