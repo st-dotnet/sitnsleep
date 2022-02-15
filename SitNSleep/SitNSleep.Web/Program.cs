@@ -23,6 +23,7 @@ builder.Services.AddDbContext<UpSystemDbContext>(options =>
 });
 
 builder.Services.AddTransient<ISalesPersonService, SalesPersonService>();
+builder.Services.AddTransient<IStoreService, StoreService>();
 
 var mappingConfig = new MapperConfiguration(mc =>
 {
@@ -50,6 +51,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=SalesPerson}/{action=Index}");
 
+app.MapSwagger();
 app.UseSwaggerUI();
 
 app.UseAuthorization();

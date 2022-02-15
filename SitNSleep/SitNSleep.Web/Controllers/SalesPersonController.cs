@@ -54,16 +54,15 @@ namespace SitNSleep.Web.Controllers
             {
                 var salesperson = await _salespersonService.GetSalesPerson(salespersonId);
 
-                //return Ok(list);
+                //return Ok(salesperson);
                 return Json(new
                 {
                     message = salesperson
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return BadRequest(new { success = false, message = $"An unhandelled error occured. {ex}" });
             }
         }
 
@@ -87,7 +86,7 @@ namespace SitNSleep.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(new { success = false, message = $"An unhandelled error occured. {ex}" });
             }
         }
 
@@ -113,7 +112,7 @@ namespace SitNSleep.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(new { success = false, message = $"An unhandelled error occured. {ex}" });
             }
         }
 
@@ -139,7 +138,7 @@ namespace SitNSleep.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(new { success = false, message = $"An unhandelled error occured. {ex}" });
             }
         }
 
@@ -152,7 +151,7 @@ namespace SitNSleep.Web.Controllers
         [Route("~/SalesPerson/DeleteSalesPerson/{saleId}")]
         public async Task<bool> DeleteSalesPerson(int saleId)
         {
-            _logger.Info($"In SalesPerson Controller DeleteSalesPersonAsync Action.");
+            _logger.Info($"In SalesPerson Controller DeleteSalesPerson Action.");
             try
             {
                 var salesperson = await _salespersonService.DeleteSalesPerson(saleId);
