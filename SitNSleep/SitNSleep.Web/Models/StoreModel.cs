@@ -2,6 +2,7 @@
 {
     public class StoreModel
     {
+        public int? StoreID { get; set; }
         public string StoreName { get; set; }
 
         public string StoreNum { get; set; }

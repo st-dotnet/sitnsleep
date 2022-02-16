@@ -9,6 +9,7 @@ namespace SitNSleep.Web.Mapper
         public DomainProfile()
         {
             CreateMap<SalesPersonModel, SalesPersonDto>().ReverseMap();
+            CreateMap<StoreModel, StoreDto>().ReverseMap();
         }
     }
 }

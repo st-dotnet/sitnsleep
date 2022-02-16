@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
+using SitNSleep.Services.Dtos;
 using SitNSleep.Services.Interfaces;
 using SitNSleep.Web.Models;
 
@@ -80,6 +81,58 @@ namespace SitNSleep.Apis.Controllers
                 return Json(new
                 {
                     message = list
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = $"An unhandelled error occured. {ex}" });
+            }
+        }
+
+        /// <summary>
+        /// Add Store
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("~/Store/AddStore")]
+        public async Task<ActionResult> AddStore([FromBody] StoreModel model)
+        {
+            _logger.Info($"In Store Controller AddStore Action.");
+            try
+            {
+                var request = _mapper.Map<StoreDto>(model);
+                var store = await _storeService.AddStore(request);
+
+                return Json(new
+                {
+                    message = store
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = $"An unhandelled error occured. {ex}" });
+            }
+        }
+
+        /// <summary>
+        /// Update Store
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("~/Store/UpdateStore")]
+        public async Task<ActionResult> UpdateStore([FromBody] StoreModel model)
+        {
+            _logger.Info($"In Store Controller UpdateStore Action.");
+            try
+            {
+                var request = _mapper.Map<StoreDto>(model);
+                var store = await _storeService.UpdateStore(request);
+
+                return Json(new
+                {
+                    message = store
                 });
             }
             catch (Exception ex)
